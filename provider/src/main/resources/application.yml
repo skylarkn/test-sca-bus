@@ -1,0 +1,23 @@
+server:
+  port: 28084
+spring:
+  rabbitmq:
+    virtual-host: /
+    host: 192.168.4.214
+    port: 5673
+  application:
+    name: provider-02
+  cloud:
+    stream:
+      rocketmq:
+        binder:
+          name-server: 192.168.4.214:9876
+          group: group1
+    bus:
+      env:
+        enabled: true
+      id: ${spring.application.name}:${server.port}
+      trace:
+        enabled: true
+      # 事件消息放到那个TOPIC
+      destination: etb2_event_topic
